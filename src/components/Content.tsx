@@ -23,7 +23,7 @@ export default function Content() {
             >
                 <div className='text-center'>
                     <span className='lineOneFont'>
-                        Google Workspace / G Suite
+                        Google Workspace
                     </span>
 
                     <br/>
@@ -47,7 +47,7 @@ export default function Content() {
                         </Button>
 
                         <Modal
-                            title='获取 G Suite for Education'
+                            title='Get Google Workspace'
                             centered
                             visible={modalVisible}
                             width={1000}
