@@ -29,7 +29,7 @@ export default function ContentForm() {
             baseURL: process.env.REACT_APP_API_BASE_URL,
             data: formData,
         })
-            .then((r: any) => {
+            .then(async (r: any) => {
                 if (r.data.success) {
                     message.success('账号创建成功')
                     setCreatedAccount({
@@ -41,7 +41,7 @@ export default function ContentForm() {
                     form.resetFields()
                 }
             })
-            .catch((e: any) => {
+            .catch(async (e: any) => {
                 message.error(e)
             })
             .then(() => {
@@ -59,7 +59,7 @@ export default function ContentForm() {
             .then((r: any) => {
                 setGsConfig(r.data)
             })
-            .catch((e: any) => {
+            .catch(async (e: any) => {
                 message.error(e)
             })
             .then(() => {
@@ -76,37 +76,42 @@ export default function ContentForm() {
     }, [domains, form])
 
     const CreatedForm = (
-        <Form labelCol={{span: 4}} wrapperCol={{span: 20}}>
-            <Form.Item label='邮箱'>
+        <Form
+            labelCol={{span: 4}}
+            wrapperCol={{span: 20}}
+        >
+            <Form.Item label="邮箱">
                 <Input
                     value={createdAccount.email}
                     prefix={<MailOutlined/>}
-                    suffix={<CopyOutlined onClick={() => {
-                        copy(createdAccount.email)
-                        message.success('已复制邮箱')
-                    }}/>}
+                    suffix={<CopyOutlined
+                        onClick={async () => {
+                            copy(createdAccount.email)
+                            message.success('已复制邮箱')
+                        }}
+                    />}
                 />
             </Form.Item>
 
-            <Form.Item label='密码'>
+            <Form.Item label="密码">
                 <Input
                     value={createdAccount.password}
                     prefix={<KeyOutlined/>}
-                    suffix={<CopyOutlined onClick={() => {
-                        copy(createdAccount.password)
-                        message.success('已复制密码')
-                    }}/>}
+                    suffix={<CopyOutlined
+                        onClick={async () => {
+                            copy(createdAccount.password)
+                            message.success('已复制密码')
+                        }}
+                    />}
                 />
             </Form.Item>
 
             <Form.Item style={{float: 'right'}}>
                 <Button
                     onClick={() =>
-                        window.open(
-                            'https://accounts.google.com/ServiceLogin'
-                        )}
-                    type='primary'
-                    htmlType='submit'
+                        window.open('https://accounts.google.com/ServiceLogin')}
+                    type="primary"
+                    htmlType="submit"
                 >
                     登录
                 </Button>
@@ -117,18 +122,18 @@ export default function ContentForm() {
     const CreateForm = (
         <Form
             form={form}
-            name='basic'
+            name="basic"
             onFinish={createUser}
             labelCol={{span: 4}}
             wrapperCol={{span: 20}}
         >
             <Form.Item
-                label='机构'
-                name='institute'
+                label="机构"
+                name="institute"
                 rules={[{required: true, message: '必选'}]}
             >
                 <Select
-                    placeholder='选择机构'
+                    placeholder="选择机构"
                     onChange={v => {
                         const selectedGs = gsConfig.find(gs => gs.id === v)
                         setDomains(
@@ -148,8 +153,8 @@ export default function ContentForm() {
             </Form.Item>
 
             <Form.Item
-                label='邮箱'
-                name='email'
+                label="邮箱"
+                name="email"
                 rules={[{
                     required: true,
                     message: '必填',
@@ -170,7 +175,7 @@ export default function ContentForm() {
                     >
                         <Input
                             style={{width: '55%'}}
-                            placeholder='用户名'
+                            placeholder="用户名"
                             allowClear
                         />
                     </Form.Item>
@@ -182,7 +187,7 @@ export default function ContentForm() {
                     >
                         <Select
                             style={{width: '45%'}}
-                            placeholder='选择后缀'
+                            placeholder="选择后缀"
                             value={domains[0]}
                             notFoundContent="请选择机构"
                         >
@@ -200,8 +205,8 @@ export default function ContentForm() {
             </Form.Item>
 
             <Form.Item
-                label='激活码'
-                name='code'
+                label="激活码"
+                name="code"
                 rules={[{
                     required: true,
                     message: '格式错误',
@@ -210,7 +215,7 @@ export default function ContentForm() {
                 }]}
             >
                 <Input
-                    placeholder='激活码'
+                    placeholder="激活码"
                     allowClear
                     // addonAfter={(
                     //     <a href={officeConfig.getCodeLink}
@@ -221,7 +226,10 @@ export default function ContentForm() {
             </Form.Item>
 
             <Form.Item style={{float: 'right'}}>
-                <Button type='primary' htmlType='submit'>
+                <Button
+                    type="primary"
+                    htmlType="submit"
+                >
                     提交
                 </Button>
             </Form.Item>
@@ -232,8 +240,9 @@ export default function ContentForm() {
     return (
         <Spin spinning={spinning}>
             <Row>
-                <Col lg={{span: 14, offset: 5}}
-                     xs={{span: 24}}
+                <Col
+                    lg={{span: 14, offset: 5}}
+                    xs={{span: 24}}
                 >
                     {!!createdAccount.password ? CreatedForm : CreateForm}
                 </Col>

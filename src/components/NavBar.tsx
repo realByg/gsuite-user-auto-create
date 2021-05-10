@@ -2,7 +2,6 @@ import React from 'react'
 import {Row, Col, Space} from 'antd'
 import CustomIcon from '../utils/custom-icon'
 
-
 export default function NavBar() {
     const gsFont = {
         fontWeight: 500,

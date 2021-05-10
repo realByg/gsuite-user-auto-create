@@ -3,7 +3,6 @@ import {Row, Col, Button, Space, Modal} from 'antd'
 
 import ContentForm from './ContentForm'
 
-
 export default function Content() {
     const contentBg = {
         background: 'url(https://i.loli.net/2020/01/22/Rgv3xJAVYN4n9Za.png) no-repeat',
@@ -29,7 +28,7 @@ export default function Content() {
                     <br/>
 
                     <span className='lineTwoFont'>
-                        Everything you need to get anything done.
+                        您所需的一切工具，都汇集在这里。
                     </span>
 
                     <br/>
