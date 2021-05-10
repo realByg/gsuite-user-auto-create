@@ -46,7 +46,7 @@ export default function Content() {
                         </Button>
 
                         <Modal
-                            title='Get Google Workspace'
+                            title='获取 Google Workspace'
                             centered
                             visible={modalVisible}
                             width={1000}
